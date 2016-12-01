@@ -1,2 +1,6 @@
 # CI_Shop_Project
-A shop application which is based on Codeigniter
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+使用Codeigniter开发的商城系统
+
+## 项目介绍
