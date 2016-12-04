@@ -5,16 +5,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<?php echo base_url().'public/styles/general.css';?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url().'public/styles/main.css';?>" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+	function chdel(cat_id){
+		if(confirm("确定删除该记录吗?")){
+			window.location = "<?php echo site_url('admin/Category/delete')?>"+"/"+cat_id;
+		}else{
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 
 <h1>
-<span class="action-span"><a href="<?php echo site_url('Admin/Category/add');?>">添加分类</a></span>
+<span class="action-span"><a href="<?php echo site_url('admin/Category/add');?>">添加分类</a></span>
 <span class="action-span1"><a href="index.php?act=main">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 商品分类 </span>
 <div style="clear:both"></div>
 </h1>
 
-<form method="post" action="" name="listForm">
+<form method="post" action="" name="listForm" id="listForm">
 <!-- start ad position list -->
 	<div class="list-div" id="listDiv">
 		<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
@@ -36,19 +45,27 @@
 						<img src="<?php echo base_url().'public/images/menu_minus.gif';?>" id="icon_0_1" width="9" height="9" border="0" style="margin-left:0em" onclick="rowClicked(this)">
 						<span><a href="goods.php?act=list&amp;cat_id=1"><?php echo $cate['cat_name'];?></a></span>
 					 </td>
-					<td width="10%">0</td>
-					<td width="10%"><span onclick="listTable.edit(this, 'edit_measure_unit', 1)" title="点击修改内容" style=""><?php echo $cate['unit']?></span></td>
-					<td width="10%"><img src="<?php echo base_url().'public/images/no.gif';?>" onclick="listTable.toggle(this, 'toggle_show_in_nav', 1)"></td>
-					<td width="10%"><img src="<?php echo base_url().'public/images/yes.gif';?>" onclick="listTable.toggle(this, 'toggle_is_show', 1)"></td>
-					<td><span onclick="listTable.edit(this, 'edit_grade', 1)" title="点击修改内容" style="">5</span></td>
-					<td width="10%" align="right"><span onclick="listTable.edit(this, 'edit_sort_order', 1)" title="点击修改内容" style=""><?php echo $cate['sort_order'];?></span></td>
-					<td width="24%" align="center">
+					 <td width="10%"><?php echo $cate['goods_num'] ?></td>
+					 <td width="10%"><span onclick="listTable.edit(this, 'edit_measure_unit', 1)" title="点击修改内容" style=""><?php echo $cate['unit']?></span></td>
+					 <td width="10%">
+						 <img src="<?php echo $cate['show_in_nav']==1 ? base_url().'public/images/yes.gif': base_url().'public/images/no.gif' ?>" onclick="listTable.toggle(this, 'toggle_show_in_nav', 1)">
+					 </td>
+					 <td width="10%">
+						 <img src="<?php echo $cate['is_show']==1 ? base_url().'public/images/yes.gif' : base_url().'public/images/no.gif' ?>" onclick="listTable.toggle(this, 'toggle_is_show', 1)">
+					 </td>
+					 <td><span onclick="listTable.edit(this, 'edit_grade', 1)" title="点击修改内容" style="">5</span></td>
+					 <td width="10%" align="center">
+						 <span onclick="listTable.edit(this, 'edit_sort_order', 1)" title="点击修改内容" style="">
+						 	<?php echo $cate['sort_order'];?>
+						</span>
+					</td>
+					 <td width="24%" align="center">
 						<a href="category.php?act=move&amp;cat_id=1">转移商品</a> |
-						<a href="<?php echo site_url('Admin/Category/edit').'/'.$cate['cat_id']?>">编辑</a> |
-						<a href="javascript:;" onclick="listTable.remove(1, '您确认要删除这条记录吗?')" title="移除">移除</a>
+						<a href="<?php echo site_url('admin/Category/edit').'/'.$cate['cat_id']?>">编辑</a> |
+						<a href="javascript:;" onclick="chdel(<?php echo $cate['cat_id']?>);" title="移除" id = "ali">移除</a>
 					</td>
 				</tr>
-      <?php endforeach;?>
+      	<?php endforeach;?>
 	   </tbody>
   </table>
 </div>

@@ -10,13 +10,13 @@
 <body>
 
 <h1>
-<span class="action-span"><a href="<?php echo site_url('Admin/Category/index');?>">商品分类</a></span>
+<span class="action-span"><a href="<?php echo site_url('admin/Category/index');?>">商品分类</a></span>
 <span class="action-span1"><a href="index.php?act=main">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 添加分类 </span>
 <div style="clear:both"></div>
 </h1>
 <!-- start add new category form -->
 <div class="main-div">
-  <form action="<?php echo site_url('Admin/Category/insert');?>" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+  <form action="<?php echo site_url('admin/Category/insert');?>" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
 	 <table width="100%" id="general-table">
 		<tbody>
 			<tr>
@@ -58,9 +58,9 @@
 			<tr>
 				<td class="label">设置为首页推荐:</td>
 				<td>
-					<input type="checkbox" name="cat_recommend[]" value="1"> 精品          
-					<input type="checkbox" name="cat_recommend[]" value="2"> 最新          
-					<input type="checkbox" name="cat_recommend[]" value="3"> 热门       
+					<input type="checkbox" name="cat_recommend[]" value="1"> 精品
+					<input type="checkbox" name="cat_recommend[]" value="2"> 最新
+					<input type="checkbox" name="cat_recommend[]" value="3"> 热门
 				</td>
 			</tr>
       <tr>
@@ -82,7 +82,7 @@
 
 
 <div id="footer">
-	版权所有 &copy; 2006-2013 传智播客 - PHP培训 - 
+	版权所有 &copy; 2006-2013 传智播客 - PHP培训 -
 </div>
 
 </div>

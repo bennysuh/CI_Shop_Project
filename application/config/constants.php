@@ -47,7 +47,7 @@ defined('FOPEN_WRITE_CREATE')                   OR define('FOPEN_WRITE_CREATE', 
 defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREATE', 'a+b');
 defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
-defined('THEMES_DIR')                           OR define('THEMES_DIR','themes/');
+defined('THEMES_DIR')                           OR define('THEMES_DIR', 'themes/');
 /*
 |--------------------------------------------------------------------------
 | Exit Status Codes

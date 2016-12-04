@@ -3,19 +3,19 @@
 <head>
 <title>SHOP 管理中心 - 属性管理 </title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="styles/general.css" rel="stylesheet" type="text/css" />
-<link href="styles/main.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url().'public/styles/general.css';?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url().'public/styles/main.css';?>" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <h1>
-<span class="action-span"><a href="attribute.php?act=list">商品属性</a></span>
+<span class="action-span"><a href="<?php echo site_url('admin/Attribute/index');?>">商品属性</a></span>
 <span class="action-span1"><a href="index.php?act=main">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 添加属性 </span>
 <div style="clear:both"></div>
 </h1>
 
 <div class="main-div">
-  <form action="attribute.php" method="post" name="theForm" onsubmit="return validate();">
+  <form action="<?php echo site_url('admin/Attribute/insert');?>" method="post" name="theForm" onsubmit="return validate();">
   <table width="100%" id="general-table">
       <tbody><tr>
         <td class="label">属性名称：</td>
@@ -26,15 +26,20 @@
       <tr>
         <td class="label">所属商品类型：</td>
         <td>
-          <select name="cat_id" onchange="onChangeGoodsType(this.value)">
-          <option value="0">请选择...</option>
-            <option value="1">书</option><option value="2">音乐</option><option value="3">电影</option><option value="4">手机</option><option value="5">笔记本电脑</option><option value="6">数码相机</option><option value="7">数码摄像机</option><option value="8">化妆品</option><option value="9">精品手机</option><option value="10">我的商品</option>          </select> <span class="require-field">*</span>        </td>
+          <select name="type_id" onchange="onChangeGoodsType(this.value)">
+            <option value="0">请选择...</option>
+            <?php foreach($good_types as $good_type):?>
+            <option value="<?php echo $good_type['type_id']?>"><?php echo $good_type['type_name'];?></option>
+          <?php endforeach;?>
+          </select>
+          <span class="require-field">*</span>
+        </td>
       </tr>
       <tr id="attrGroups" style="display: none;">
         <td class="label">属性分组：</td>
         <td>
           <select name="attr_group">
-                    </select>
+          </select>
         </td>
       </tr>
       <tr>
@@ -68,7 +73,7 @@
       <tr>
         <td class="label">可选值列表：</td>
         <td>
-          <textarea name="attr_values" cols="30" rows="5" disabled=""></textarea>
+          <textarea name="attr_value" cols="30" rows="5" disabled=""></textarea>
         </td>
       </tr>
       <tr>
@@ -88,6 +93,10 @@
 <div id="footer">
 	版权所有 &copy; 2006-2013 传智播客 - PHP培训 - </div>
 </div>
-
+<script type="text/javascript">
+  function radioClicked(n){
+    document.forms['theForm'].elements['attr_value'].disabled = n > 0 ? false : true;
+  }
+</script>
 </body>
 </html>

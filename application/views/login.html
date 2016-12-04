@@ -13,7 +13,7 @@ body {
 
 </head>
 <body style="background: #278296">
-<form method="post" action="<?php echo site_url('Admin/Privilege/signin');?>" name='theForm'>
+<form method="post" action="<?php echo site_url('admin/Privilege/signin');?>" name='theForm'>
   <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
   <tr>
     <td><img src="<?php echo base_url().'public/images/login.png';?>" width="178" height="256" border="0" alt="ECSHOP" /></td>
@@ -46,7 +46,7 @@ body {
       </tr>
       <tr>
       <td colspan="2" align="right">
-         <img src="<?php echo site_url('Admin/Privilege/code');?>" width="145" height="20" alt="CAPTCHA" border="1" onclick= this.src="<?php echo site_url('Admin/Privilege/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+         <img src="<?php echo site_url('admin/Privilege/code');?>" width="145" height="20" alt="CAPTCHA" border="1" onclick= this.src="<?php echo site_url('admin/Privilege/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
       </td>
       </tr>
       <tr><td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">请保存我这次的登录信息</label></td></tr>
