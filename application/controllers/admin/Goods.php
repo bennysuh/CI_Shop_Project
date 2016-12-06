@@ -17,6 +17,8 @@ class Goods extends Admin_Controller{
 	public function index(){
 		$data['cates'] = $this->Category_model->list_cate();
 		$data['brands'] = $this->Brand_model->list_brand();
+		$data['suppliers'] = $this->Goods_model->get_all_sup();
+		$data['goods'] = $this->Goods_model->get_all_goods();
 		$this->load->view('goods_list.html',$data);
 	}
 	//显示添加表单
@@ -24,25 +26,37 @@ class Goods extends Admin_Controller{
 		$data['goodtypes'] = $this->Goodtype_model->get_alltype();
 		$data['cates'] = $this->Category_model->list_cate();
 		$data['brands'] = $this->Brand_model->list_brand();
+		$data['suppliers'] = $this->Goods_model->get_all_sup();
 		$this->load->view('goods_add.html',$data);
 	}
 	//执行添加操作
 	public function insert(){
 		$data['goods_name'] = $this->input->post('goods_name');
-		$data['goods_sn'] = $this->input->post('goods_sn');
+		$data['goods_sn'] = "EC".strval(time());
 		$data['cat_id'] = $this->input->post('cat_id');
 		$data['brand_id'] = $this->input->post('brand_id');
+		$data['suppliers_id'] = $this->input->post('suppliers_id');
 		$data['market_price'] = $this->input->post('market_price');
+		$data['user_price'] = $this->input->post('user_price');
 		$data['shop_price'] = $this->input->post('shop_price');
 		$data['promote_price'] = $this->input->post('promote_price');
 		$data['promote_start_time'] = strtotime($this->input->post('promote_start_time'));
 		$data['promote_end_time'] = strtotime($this->input->post('promote_end_time'));
+		$data['goods_weight'] = $this->input->post('goods_weight')*$this->input->post('weight_unit');
 		$data['goods_number'] = $this->input->post('goods_number');
+		$data['warn_number'] = $this->input->post('warn_number');
+		$data['goods_desc'] = $this->input->post('goods_desc');
 		$data['goods_brief'] = $this->input->post('goods_brief');
-		$data['is_new'] = $this->input->post('is_new');
-		$data['is_hot'] = $this->input->post('is_hot');
-		$data['is_best'] = $this->input->post('is_best');
-		$data['is_onsale'] = $this->input->post('is_onsale');
+		$data['goods_type'] = $this->input->post('goods_type');
+		$data['keywords'] = $this->input->post('keywords');
+		$data['is_promote'] = isset($_POST['is_promote']) ? $this->input->post('is_promote') : 0;
+		$data['is_new'] = isset($_POST['is_new']) ? $this->input->post('is_new') : 0;
+		$data['is_hot'] = isset($_POST['is_hot']) ? $this->input->post('is_hot') : 0;
+		$data['is_best'] = isset($_POST['is_best']) ? $this->input->post('is_best') : 0;
+		$data['is_onsale'] = isset($_POST['is_onsale']) ? $this->input->post('is_onsale') : 0;
+		$data['is_alone_sale'] = isset($_POST['is_alone_sale']) ? $this->input->post('is_alone_sale') : 0;
+		$data['is_shipping'] = isset($_POST['is_alone_shipping']) ? $this->input->post('is_shipping') : 0;
+		$data['add_time'] = time();
 		//配置文件上传类
 		$config['upload_path'] = './public/uploads/';
 		$config['allowed_types'] = 'jpg|gif|png';
@@ -99,8 +113,13 @@ class Goods extends Admin_Controller{
 		}
 	}
 	//显示编辑表单
-	public function edit(){
-		$this->load->view('goods_edit.html');
+	public function edit($goods_id){
+		$data['goods'] = $this->Goods_model->get_goods($goods_id);
+		$data['goodtypes'] = $this->Goodtype_model->get_alltype();
+		$data['cates'] = $this->Category_model->list_cate();
+		$data['brands'] = $this->Brand_model->list_brand();
+		$data['suppliers'] = $this->Goods_model->get_all_sup();
+		$this->load->view('goods_edit.html',$data);
 	}
 	//处理ajax获取分类属性数据的请求
 	public function create_attrs_html(){

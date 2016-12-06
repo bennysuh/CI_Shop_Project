@@ -13,6 +13,11 @@ class Goods_model extends CI_Model{
 		$query = $this->db->insert($this->table,$data);
 		return $query ? $this->db->insert_id() : false;
 	}
+	//获取所有的商品
+	public function get_all_goods(){
+		$query = $this->db->get($this->table);
+		return $query->result_array();
+	}
 	//根据编号获取商品
 	public function get_goods($goods_id){
 		$condition['goods_id'] = $goods_id;
@@ -25,4 +30,11 @@ class Goods_model extends CI_Model{
 		$query = $this->db->where($condition)->get($this->table);
 		return $query->result_array();
 	}
+	//获取所有的供货商
+	public function get_all_sup(){
+		$table = "supplier";
+		$query = $this->db->get($table);
+		return $query->result_array();
+	}
+	
 }
