@@ -36,5 +36,9 @@ class Goods_model extends CI_Model{
 		$query = $this->db->get($table);
 		return $query->result_array();
 	}
-	
+	//插入至商品相册
+	public function add_to_galary($galary){
+		$table = "galary";
+		return $this->db->insert($table,$galary);
+	}
 }

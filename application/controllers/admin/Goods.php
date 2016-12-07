@@ -60,7 +60,7 @@ class Goods extends Admin_Controller{
 		//配置文件上传类
 		$config['upload_path'] = './public/uploads/';
 		$config['allowed_types'] = 'jpg|gif|png';
-		$config['max_size'] = 1000;
+		$config['max_size'] = 10000;
 		$this->load->library('upload',$config);
 		//进行文件上传
 		if($this->upload->do_upload('goods_img')){
@@ -89,6 +89,19 @@ class Goods extends Admin_Controller{
 							$this->db->insert('goods_attr',$data2);
 						}
 					}
+					$img_descs = $this->input->post('img_desc');
+					$info = $this->upload->multiple('img_url');
+					//多文件上传并插入数据库
+					if(empty($info['error'])){
+						for($i=0;$i<count($info['files']);$i++){
+							$data_img['goods_id'] = $goods_id;
+							$data_img['img_url'] = $info['files'][$i]['file_name'];
+							$data_img['thumb_url'] = "space";
+							$data_img['img_desc'] = $img_descs[$i];
+							$this->Goods_model->add_to_galary($data_img);
+						}
+					}
+					//添加商品相册信息至数据库
 					$data['message'] = "添加商品成功!";
 					$data['wait'] = 3;
 					$data['url'] = site_url('admin/Goods/index');
@@ -121,6 +134,7 @@ class Goods extends Admin_Controller{
 		$data['suppliers'] = $this->Goods_model->get_all_sup();
 		$this->load->view('goods_edit.html',$data);
 	}
+
 	//处理ajax获取分类属性数据的请求
 	public function create_attrs_html(){
 		$typeid = $this->input->get('type_id');
